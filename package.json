@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run start:dev\""
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "prisma": "^4.7.1"
   },
   "dependencies": {
-    "@prisma/client": "^4.7.1"
+    "@prisma/client": "^4.7.1",
+    "concurrency": "^0.1.4"
   }
 }
