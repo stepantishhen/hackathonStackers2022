@@ -14,6 +14,7 @@ import { AllExceptionsFilter } from 'src/shared/lib';
 import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { TConfig } from 'src/shared/types';
+import { LoginDTO } from './dto/login';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +25,7 @@ export class AuthController {
 
   @Post('/login')
   @UseFilters(AllExceptionsFilter)
-  async login(@Body() userDto: CreateUserDTO, @Res() response: Response) {
+  async login(@Body() userDto: LoginDTO, @Res() response: Response) {
     const userData = await this.authService.login(userDto);
     response.cookie(
       this.configService.getOrThrow('cookieRefreshTokenKey'),

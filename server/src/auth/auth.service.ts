@@ -9,6 +9,7 @@ import { TokensService } from 'src/tokens/tokens.service';
 import { UserDTO } from './dto/user';
 import { ErrorCodes } from 'src/shared/lib';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { LoginDTO } from './dto/login';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     private prismaService: PrismaService,
   ) {}
 
-  async login({ email, password }: CreateUserDTO) {
+  async login({ email, password }: LoginDTO) {
     const user = await this.prismaService.user.findUnique({
       where: { email: email },
     });
