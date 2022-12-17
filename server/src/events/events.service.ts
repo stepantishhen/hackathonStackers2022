@@ -16,9 +16,17 @@ export class EventsService {
     });
   }
 
-  async getList() {
-    return this.prismaService.event.findMany({
+  async getList(userId: string) {
+    const events = await this.prismaService.event.findMany({
       include: {
+        visitors: {
+          where: {
+            userId,
+          },
+          select: {
+            attended: true,
+          },
+        },
         createdBy: {
           select: {
             user: {
@@ -37,5 +45,11 @@ export class EventsService {
       },
       take: 30,
     });
+
+    return events;
+    // return events.map(event => ({
+    //   ...event,
+    //   visitors: event.visitors.
+    // }));
   }
 }

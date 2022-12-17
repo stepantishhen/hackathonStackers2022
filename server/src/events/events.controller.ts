@@ -29,7 +29,8 @@ export class EventsController {
 
   @Get('/')
   @UseFilters(AllExceptionsFilter)
-  async list() {
-    return this.eventService.getList();
+  @UseGuards(AuthGuard)
+  async list(@Req() req: SRequest) {
+    return this.eventService.getList(req.userId);
   }
 }
