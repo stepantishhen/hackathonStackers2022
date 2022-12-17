@@ -6,12 +6,36 @@ import { CreateEventDTO } from './dto/create-event';
 export class EventsService {
   constructor(private prismaService: PrismaService) {}
 
-  async create(event: CreateEventDTO) {
+  async create(event: CreateEventDTO, userId: string) {
     await this.prismaService.event.create({
       data: {
         ...event,
         date: new Date(),
+        createdBy: { connect: { userId } },
       },
+    });
+  }
+
+  async getList() {
+    return this.prismaService.event.findMany({
+      include: {
+        createdBy: {
+          select: {
+            user: {
+              select: {
+                firstName: true,
+                surname: true,
+                patronymic: true,
+              },
+            },
+            organization: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: 30,
     });
   }
 }
