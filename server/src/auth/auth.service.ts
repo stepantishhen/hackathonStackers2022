@@ -52,6 +52,7 @@ export class AuthService {
       data: {
         ...dto,
         password: hashPassword,
+        visitor: { create: { telegram: 'telega' } },
       },
     });
 
