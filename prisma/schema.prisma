@@ -11,5 +11,23 @@ datasource db {
 }
 
 model User {
-  id Int @id
+  id         String   @id @default(uuid())
+  firstName  String
+  surname    String
+  patronymic String
+  age        Int
+  visitor    Visitor?
+  admin      Admin?
+  visitorId  String
+}
+
+model Visitor {
+  user     User   @relation(fields: [userId], references: [id])
+  telegram String
+  userId   String @unique
+}
+
+model Admin {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
 }
