@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEventDTO } from './dto/create-event';
+import { UserEventDTO } from './dto/user-event';
 
 @Injectable()
 export class EventsService {
@@ -47,9 +48,29 @@ export class EventsService {
     });
 
     return events;
-    // return events.map(event => ({
-    //   ...event,
-    //   visitors: event.visitors.
-    // }));
+  }
+
+  async subscribe({ eventId }: UserEventDTO, userId: string) {
+    const event = await this.prismaService.eventVisitor.findUnique({
+      where: { userId_eventId: { eventId, userId } },
+      select: null,
+    });
+    if (event) throw new ConflictException();
+
+    await this.prismaService.eventVisitor.create({
+      data: {
+        Event: { connect: { id: eventId } },
+        visitor: { connect: { userId } },
+        attended: false,
+      },
+    });
+  }
+
+  async unsubscribe({ eventId }: UserEventDTO, userId: string) {
+    await this.prismaService.eventVisitor.delete({
+      where: {
+        userId_eventId: { eventId, userId },
+      },
+    });
   }
 }
