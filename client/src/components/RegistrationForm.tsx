@@ -15,24 +15,27 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiInstance } from '../api/api';
 import { FormControl, InputLabel, Select } from '@mui/material';
+import { saveToken } from '../api';
 
 const theme = createTheme();
 
 export default function RegistrationForm() {
 	const [age, setAge] = useState(0);
 
-	const handleSubmit = (event: any) => {
+	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 
-		const response = apiInstance.post('/auth/signup', {
+		const response = await apiInstance.post('/auth/signup', {
 			email: data.get('email'),
 			password: data.get('password'),
 			firstName: data.get('firstName'),
 			surname: data.get('surname'),
 			patronymic: data.get('patronymic'),
-			age: data.get('age'),
+			age: Number(data.get('age')),
 		});
+
+		saveToken(response.data.data.accessToken);
 
 		console.log({
 			api: import.meta.env.VITE_API_URL,

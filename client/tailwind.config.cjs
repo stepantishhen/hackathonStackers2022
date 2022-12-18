@@ -5,14 +5,22 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#FFFFFF',
+				contrast: '#000000',
 				secondary: '#2B2D42',
 				danger: '#D80032',
 				accent: '#8D99AE',
 			},
-			fontFamily: {
-				primary: ['Roboto', 'sans-serif'],
-			},
+		},
+		fontFamily: {
+			inter: ['Inter', 'sans-serif'],
+			montserrat: ['Montserrat', 'sans-serif'],
+		},
+		gridTemplateRows: {
+			eventLayout: 'auto',
+		},
+		gridTemplateColumns: {
+			eventLayout: 'minmax(250px, 1fr) 2fr',
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/line-clamp')],
 };

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Header from '../components/Header';
 
-const MainLayout = () => {
+const MainLayout = ({ children }: PropsWithChildren) => {
 	return (
-		<>
+		<div className=" max-w-[1920px] min-h-screen">
 			<Header />
-		</>
+			{children}
+		</div>
 	);
 };
 

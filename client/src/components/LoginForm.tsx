@@ -11,15 +11,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { saveToken } from '../api';
 
 const theme = createTheme();
 
 export default function LoginForm() {
-	const handleSubmit = (event: any) => {
+	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 
-		const response = apiInstance.post('/auth/login', {
+		const response = await apiInstance.post('/auth/login', {
 			email: data.get('email'),
 			password: data.get('password'),
 		});
@@ -29,6 +30,7 @@ export default function LoginForm() {
 			email: data.get('email'),
 			password: data.get('password'),
 		});
+		saveToken(response.data.data.accessToken);
 	};
 
 	return (
