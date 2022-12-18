@@ -4,17 +4,18 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { ErrorCodes } from 'src/shared/lib';
 import { TokensService } from 'src/tokens/tokens.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private tokenService: TokensService) {}
+  constructor(
+    private tokenService: TokensService,
+    private prismaService: PrismaService,
+  ) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
 
     try {
@@ -27,8 +28,13 @@ export class AuthGuard implements CanActivate {
       const userData = this.tokenService.validateAccessToken(token);
       if (!userData) throw new UnauthorizedException(ErrorCodes.unauth);
 
+      const isAdmin = await this.prismaService.admin.findUnique({
+        where: { userId: userData.id },
+        select: null,
+      });
+
+      req.isAdmin = !!isAdmin;
       req.userId = userData?.id;
-      req.user = true;
       return true;
     } catch (e) {
       throw new UnauthorizedException(ErrorCodes.unauth);

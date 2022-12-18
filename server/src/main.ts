@@ -9,13 +9,11 @@ import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(
-    cors({
-      origin: '*',
-      methods: '*',
-    }),
-  );
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:5173'],
+    methods: 'GET,POST',
+    credentials: true,
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   const config = app.get(ConfigService);
   app.enableVersioning({

@@ -24,9 +24,10 @@ model User {
 }
 
 model Visitor {
-  user     User   @relation(fields: [userId], references: [id])
+  user     User           @relation(fields: [userId], references: [id])
   telegram String
-  userId   String @unique
+  userId   String         @unique
+  events   EventVisitor[]
 }
 
 model Admin {
@@ -46,13 +47,25 @@ model Tokens {
 }
 
 model Event {
-  id          String   @id @default(uuid())
+  id          String         @id @default(uuid())
   name        String
   description String
   date        DateTime
   place       String
-  createdBy   Admin?   @relation(fields: [adminUserId], references: [userId])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdBy   Admin?         @relation(fields: [adminUserId], references: [userId])
+  visitors    EventVisitor[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
   adminUserId String?
+}
+
+model EventVisitor {
+  id       String   @id @default(uuid())
+  visitor  Visitor? @relation(fields: [userId], references: [userId])
+  Event    Event?   @relation(fields: [eventId], references: [id])
+  userId   String
+  eventId  String?
+  attended Boolean
+
+  @@unique([userId, eventId])
 }
