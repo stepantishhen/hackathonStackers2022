@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { Admin, User, Visitor } from '@prisma/client';
 
 export class UserDTO {
   id: string;
@@ -6,12 +6,19 @@ export class UserDTO {
   firstName: string;
   surname: string;
   patronymic: string;
+  type: 'visitor' | 'admin';
 
-  constructor(user: User) {
+  constructor(
+    user: User & {
+      visitor: Visitor;
+      admin: Admin;
+    },
+  ) {
     this.id = user.id;
     this.email = user.email;
     this.firstName = user.firstName;
     this.surname = user.surname;
     this.patronymic = user.patronymic;
+    this.type = !!user.visitor ? 'visitor' : 'admin';
   }
 }
