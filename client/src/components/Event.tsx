@@ -16,9 +16,8 @@ interface EventProps {
 }
 
 const Event = ({ id, name, description, place, date, visitors }: EventProps) => {
-	const tags = ['tag1', 'tag2', 'tag3'];
+	const tags = ['DevOps', 'WEB', 'Data-Science'];
 	const [isSubscribed, setIsSubscribed] = useState(!!visitors?.length);
-	console.log('visitors', visitors);
 
 	const handleSubscribe = async () => {
 		if (isSubscribed) {
@@ -40,28 +39,24 @@ const Event = ({ id, name, description, place, date, visitors }: EventProps) => 
         max-w-5xl max-md:event-mobile">
 			<h3
 				className="border uppercase text-2xl text-primary font-black tracking-wider grid place-content-center
-            max-md:border-none p-2 max-w-xs">
-				{name} Lorem ipsum dolor Lorem ipsum dolor sit amet.
+            max-md:border-none py-2 px-2 max-w-xs max-md:max-w-full">
+				{name}
 			</h3>
-			<div className="text-md rounded-md bg-primary overflow-hidden grid ">
+			<div className="w-full text-md rounded-md bg-primary overflow-hidden grid ">
 				<div className="">
-					<div className=" font-montserrat p-4 pb-2 text-primaryContrast">
+					<div className=" font-montserrat p-4 text-primaryContrast ">
 						{tags && (
-							<div className="flex gap-2">
+							<div className="flex gap-2 ">
 								{tags.map((tag) => (
 									<span
 										key={tag}
-										className="text-sm text-primary bg-primaryContrast font-bold font-inter rounded-2xl px-4 py-1 mb-2">
+										className="flex items-center justify-center text-sm text-primary bg-primaryContrast font-bold font-inter rounded-2xl px-4 py-1 mb-2">
 										{tag}
 									</span>
 								))}
 							</div>
 						)}
-						<p className=" font-medium line-clamp-5">
-							{description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-							adipisci laborum harum consequuntur reiciendis officiis, unde totam voluptatem
-							veritatis odit.
-						</p>
+						<p className="font-medium overflow-hidden line-clamp-4">{description}</p>
 					</div>
 				</div>
 			</div>

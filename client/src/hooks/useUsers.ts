@@ -1,10 +1,26 @@
 import React from 'react';
-import axios from 'axios';
-import useSWR from 'swr';
+import jwtDecode from 'jwt-decode';
+
+type Token = {
+	email: string;
+	firstName: string;
+	surname: string;
+	patronymic: string;
+	age: number;
+	type: string;
+};
 
 export default function useUser() {
-	const address = `https://api`;
-	const fetcher = async (url: string) => await axios.get(url).then((res) => res.data);
-	const { data, error } = useSWR(address, fetcher);
-	return {};
+	const token = localStorage.getItem('accessToken');
+	const [user, setUser] = React.useState<Token | null>(null);
+
+	if (token) {
+		const decodedToken: Token = jwtDecode(token);
+		const user = {
+			...decodedToken,
+		};
+		setUser(user);
+	}
+
+	return { user };
 }

@@ -1,4 +1,5 @@
 import { ThemeProvider, useTheme } from '@emotion/react';
+import jwtDecode from 'jwt-decode';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -8,6 +9,12 @@ import Register from './pages/Register';
 import theme from './theme';
 
 function App() {
+	const verifyUser = () => {
+		const token = localStorage.getItem('accessToken');
+		console.log(token);
+		return token ? true : false;
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
