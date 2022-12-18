@@ -1,9 +1,13 @@
+import { Type } from 'class-transformer';
 import {
+  ArrayContains,
+  IsArray,
   IsDate,
   IsDateString,
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 
 export class CreateEventDTO {
@@ -26,4 +30,7 @@ export class CreateEventDTO {
   @MaxLength(100)
   @MinLength(1)
   place!: string;
+
+  @IsArray()
+  tags!: string[];
 }
