@@ -17,8 +17,7 @@ import { apiInstance } from '../api/api';
 import { FormControl, InputLabel, Select } from '@mui/material';
 import { saveToken } from '../api';
 import { useNavigate } from 'react-router-dom';
-
-const theme = createTheme();
+import theme from '../theme';
 
 export default function RegistrationForm() {
 	const navigate = useNavigate();
@@ -72,6 +71,7 @@ export default function RegistrationForm() {
 							margin="normal"
 							required
 							fullWidth
+							color="secondary"
 							id="email"
 							label="Электронная почта"
 							name="email"
@@ -82,6 +82,7 @@ export default function RegistrationForm() {
 							margin="normal"
 							required
 							fullWidth
+							color="secondary"
 							name="password"
 							label="Пароль"
 							type="password"
@@ -94,12 +95,14 @@ export default function RegistrationForm() {
 							fullWidth
 							id="name"
 							label="Имя"
+							color="secondary"
 							name="firstName"
 							autoComplete="email"
 						/>
 						<TextField
 							margin="normal"
 							required
+							color="secondary"
 							fullWidth
 							id="surname"
 							label="Фамилия"
@@ -110,6 +113,7 @@ export default function RegistrationForm() {
 							margin="normal"
 							required
 							fullWidth
+							color="secondary"
 							id="patronymic"
 							label="Отчество"
 							name="patronymic"
@@ -120,12 +124,18 @@ export default function RegistrationForm() {
 							required
 							fullWidth
 							id="age"
+							color="secondary"
 							label="Возраст"
 							name="age"
 							autoComplete="age"
 						/>
 
-						<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+						<Button
+							type="submit"
+							color="secondary"
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2 }}>
 							Зарегистрироваться
 						</Button>
 						<Grid container>

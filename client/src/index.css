@@ -17,10 +17,22 @@
 
 @layer components {
   .btn {
-    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-lg;
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-lg min-w-full;
   }
-  .btn:hover {
-    @apply bg-blue-700;
+
+  .btn:active {
+    @apply bg-blue-900;
+  }
+
+  .btn--active {
+    @apply bg-danger;
+  }
+
+}
+
+@layer utilities {
+  .event-mobile {
+    @apply flex flex-col justify-center items-center;
   }
 }
 

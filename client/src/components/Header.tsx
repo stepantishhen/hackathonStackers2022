@@ -21,7 +21,7 @@ export default function Header() {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static">
+			<AppBar position="static" color="secondary">
 				<Drawer anchor={anchor} open={isOpen} onClose={toggleMenu}>
 					<IconButton
 						onClick={toggleMenu}
@@ -32,6 +32,7 @@ export default function Header() {
 						sx={{ mr: 2 }}>
 						<Close />
 					</IconButton>
+					<Typography variant="h6">Разделы</Typography>
 				</Drawer>
 
 				<Toolbar>
@@ -44,8 +45,12 @@ export default function Header() {
 						sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" fontWeight={'xl'} component="div" sx={{ flexGrow: 1 }}>
-						Мероприятия
+					<Typography
+						variant="h6"
+						fontWeight={'xl'}
+						component="div"
+						sx={{ flexGrow: 1, pointerEvents: 'none' }}>
+						Stackers Мероприятия
 					</Typography>
 					<Button onClick={() => navigate('/login')} color="inherit">
 						Войти
@@ -54,4 +59,7 @@ export default function Header() {
 			</AppBar>
 		</Box>
 	);
+}
+{
+	/*  */
 }

@@ -2,14 +2,14 @@ import { createTheme } from '@mui/material';
 import Garamond from './fonts/garamond/Garamond.ttf';
 import NeueHass from './fonts/neueHass/NeueHaasUnicaPro-Medium.ttf';
 
-export const theme = createTheme({
+const theme = createTheme({
 	palette: {
 		primary: {
 			main: '#FFFFFF',
 			contrastText: '#000000',
 		},
 		secondary: {
-			main: '#D80032',
+			main: '#000000',
 			contrastText: '#FFFFFF',
 		},
 	},
@@ -17,3 +17,5 @@ export const theme = createTheme({
 		fontFamily: [NeueHass, Garamond].join(','),
 	},
 });
+
+export default theme;

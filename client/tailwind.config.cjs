@@ -5,10 +5,13 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#FFFFFF',
-				contrast: '#000000',
-				secondary: '#2B2D42',
+				primaryContrast: '#000000',
+				secondary: '#14213d',
+				secondaryContrast: '#FFFFFF',
 				danger: '#D80032',
-				accent: '#8D99AE',
+				dangerContrast: '#FFFFFF',
+				accent: '#fca311',
+				accentContrast: '#000000',
 			},
 		},
 		fontFamily: {
@@ -16,10 +19,10 @@ module.exports = {
 			montserrat: ['Montserrat', 'sans-serif'],
 		},
 		gridTemplateRows: {
-			eventLayout: 'auto',
+			eventLayout: '2fr auto',
 		},
 		gridTemplateColumns: {
-			eventLayout: 'minmax(250px, 1fr) 2fr',
+			eventLayout: 'auto auto ',
 		},
 	},
 	plugins: [require('@tailwindcss/line-clamp')],

@@ -13,8 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { saveToken } from '../api';
 import { useNavigate } from 'react-router-dom';
-
-const theme = createTheme();
+import theme from '../theme';
 
 export default function LoginForm() {
 	const navigate = useNavigate();
@@ -57,6 +56,7 @@ export default function LoginForm() {
 					<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 						<TextField
 							margin="normal"
+							color="secondary"
 							required
 							fullWidth
 							id="email"
@@ -68,6 +68,7 @@ export default function LoginForm() {
 						<TextField
 							margin="normal"
 							required
+							color="secondary"
 							fullWidth
 							name="password"
 							label="Пароль"
@@ -76,17 +77,22 @@ export default function LoginForm() {
 							autoComplete="current-password"
 						/>
 
-						<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+						<Button
+							color="secondary"
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2 }}>
 							Войти
 						</Button>
 						<Grid container>
 							<Grid item xs>
-								<Link href="forgot" variant="body2">
+								<Link color="secondary" href="forgot" variant="body2">
 									Забыли пароль?
 								</Link>
 							</Grid>
 							<Grid item>
-								<Link href="register" variant="body2">
+								<Link color="secondary" href="register" variant="body2">
 									{'Зарегистрироваться'}
 								</Link>
 							</Grid>
