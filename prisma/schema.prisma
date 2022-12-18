@@ -54,6 +54,7 @@ model Event {
   place       String
   createdBy   Admin?         @relation(fields: [adminUserId], references: [userId])
   visitors    EventVisitor[]
+  tags        String[]
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   adminUserId String?
