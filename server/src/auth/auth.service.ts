@@ -21,6 +21,7 @@ export class AuthService {
   async login({ email, password }: LoginDTO) {
     const user = await this.prismaService.user.findUnique({
       where: { email: email },
+      include: { visitor: true, admin: true },
     });
     if (!user) throw new BadRequestException(ErrorCodes.userNotFound);
 
@@ -54,6 +55,7 @@ export class AuthService {
         password: hashPassword,
         visitor: { create: { telegram: 'telega' } },
       },
+      include: { admin: true, visitor: true },
     });
 
     const userDTO = new UserDTO(user);
@@ -80,7 +82,7 @@ export class AuthService {
       const userData = this.tokensService.validateRefreshToken(refreshToken);
       const tokenFromDB = await this.prismaService.tokens.findUnique({
         where: { refreshToken },
-        include: { User: true },
+        include: { User: { include: { admin: true, visitor: true } } },
       });
 
       if (!userData || !tokenFromDB)
