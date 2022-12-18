@@ -20,8 +20,10 @@ module.exports = {
 		},
 		gridTemplateRows: {
 			eventLayout: '2fr auto',
+			profileLayout: '1fr 1fr',
 		},
 		gridTemplateColumns: {
+			profileLayout: '1fr 1fr 1fr',
 			eventLayout: 'auto auto ',
 		},
 	},

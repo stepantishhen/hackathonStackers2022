@@ -14,9 +14,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { saveToken } from '../api';
 import { useNavigate } from 'react-router-dom';
 import theme from '../theme';
+import { useDispatch } from 'react-redux';
+import { UserAuthType } from '../api/types';
+import jwtDecode from 'jwt-decode';
+import { setUser, UserState } from '../features/userSlice';
 
 export default function LoginForm() {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
@@ -33,6 +38,12 @@ export default function LoginForm() {
 			password: data.get('password'),
 		});
 		saveToken(response.data.data.accessToken);
+		const token = localStorage.getItem('accessToken');
+		if (token) {
+			const user: UserState = jwtDecode(token);
+			dispatch(setUser(user));
+		}
+
 		navigate('/');
 	};
 

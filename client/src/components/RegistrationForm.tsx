@@ -46,8 +46,8 @@ export default function RegistrationForm() {
 			surname: data.get('surname'),
 			patronymic: data.get('patronymic'),
 		});
+		navigate('/');
 	};
-	navigate('/');
 
 	return (
 		<ThemeProvider theme={theme}>

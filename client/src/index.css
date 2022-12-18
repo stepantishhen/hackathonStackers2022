@@ -28,6 +28,9 @@
     @apply bg-danger;
   }
 
+  .profileGridElement {
+    @apply flex flex-col justify-center items-center;
+  }
 }
 
 @layer utilities {
