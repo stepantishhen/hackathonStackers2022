@@ -12,10 +12,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { saveToken } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function LoginForm() {
+	const navigate = useNavigate();
+
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
@@ -31,6 +34,7 @@ export default function LoginForm() {
 			password: data.get('password'),
 		});
 		saveToken(response.data.data.accessToken);
+		navigate('/');
 	};
 
 	return (

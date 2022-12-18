@@ -16,11 +16,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiInstance } from '../api/api';
 import { FormControl, InputLabel, Select } from '@mui/material';
 import { saveToken } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function RegistrationForm() {
-	const [age, setAge] = useState(0);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
@@ -47,6 +48,7 @@ export default function RegistrationForm() {
 			patronymic: data.get('patronymic'),
 		});
 	};
+	navigate('/');
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -124,7 +126,7 @@ export default function RegistrationForm() {
 						/>
 
 						<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-							Войти
+							Зарегистрироваться
 						</Button>
 						<Grid container>
 							<Grid item xs>
