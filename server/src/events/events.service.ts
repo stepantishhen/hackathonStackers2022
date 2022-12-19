@@ -65,12 +65,15 @@ export class EventsService {
     });
     if (event) throw new ConflictException();
 
-    await this.prismaService.eventVisitor.create({
+    const {
+      Event: { name },
+    } = await this.prismaService.eventVisitor.create({
       data: {
         Event: { connect: { id: eventId } },
         visitor: { connect: { userId } },
         attended: false,
       },
+      include: { Event: { select: { name: true } } },
     });
 
     const qrApiUrl = new URL('https://api.qrserver.com/v1/create-qr-code');
@@ -80,6 +83,9 @@ export class EventsService {
     await this.grammyService.api.sendPhoto(
       this.configService.getOrThrow('TG_USER_ID'),
       qrApiUrl.href,
+      {
+        caption: `Вы записались на мероприятие ${name}\n\nПеред входом покажите QR-code организатору`,
+      },
     );
   }
 
@@ -111,6 +117,7 @@ export class EventsService {
       visitor: {
         user: { firstName, surname },
       },
+      Event: { name },
     } = await this.prismaService.eventVisitor.update({
       where: { id: eventVisitor.id },
       data: { attended: true },
@@ -118,8 +125,14 @@ export class EventsService {
         visitor: {
           select: { user: { select: { firstName: true, surname: true } } },
         },
+        Event: { select: { name: true } },
       },
     });
+
+    await this.grammyService.api.sendMessage(
+      this.configService.getOrThrow('TG_USER_ID'),
+      `Спасибо что посетили мероприятие ${name}`,
+    );
 
     return { firstName, surname };
   }
