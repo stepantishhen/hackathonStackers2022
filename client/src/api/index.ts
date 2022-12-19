@@ -1,16 +1,18 @@
 import { ApiSuccessResponse, AuthResponseType, UserAuthType } from './types';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { setUser, UserState } from '../features/userSlice';
 
 const accessTokenKey = 'accessToken';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const saveToken = (token: string) => {
 	window.localStorage.setItem(accessTokenKey, token);
-	const user: UserAuthType = jwtDecode(token);
-	// const userStore = useUserStore();
-	console.log('user', user);
-	// userStore.setUser(user);
+	const user: UserState = jwtDecode(token);
+
+	const dispatch = useDispatch();
+	dispatch(setUser(user));
 };
 
 export const getNewToken = async () => {
