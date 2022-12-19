@@ -83,18 +83,14 @@ export default function Header() {
 						sx={{ flexGrow: 1 }}>
 						Stackers <span className="underline underline-offset-4 text-blue-300 ">Events</span>
 					</Typography>
-					{/* <Search>
-						<SearchIconWrapper>
-							<SearchIcon />
-						</SearchIconWrapper>
-						<StyledInputBase
-							placeholder={searchQuery ? searchQuery : 'Поиск...'}
-							inputRef={(ref) => {
-								setSearchQuery(ref?.value);
-							}}
-							inputProps={{ 'aria-label': 'search' }}
-						/>
-					</Search> */}
+					<Typography
+						variant="h6"
+						fontWeight={'xl'}
+						onClick={() => navigate('/scan')}
+						component="div"
+						sx={{ flexGrow: 1 }}>
+						Stackers <span className="underline underline-offset-4 text-blue-300 ">Events</span>
+					</Typography>
 
 					<Button onClick={() => navigate(user ? '/profile' : '/login')} color="inherit">
 						<span className="ml-2 font-bold font-montserrat">
