@@ -107,9 +107,20 @@ export class EventsService {
 
     if (eventVisitor.attended) throw new ConflictException();
 
-    await this.prismaService.eventVisitor.update({
+    const {
+      visitor: {
+        user: { firstName, surname },
+      },
+    } = await this.prismaService.eventVisitor.update({
       where: { id: eventVisitor.id },
       data: { attended: true },
+      include: {
+        visitor: {
+          select: { user: { select: { firstName: true, surname: true } } },
+        },
+      },
     });
+
+    return { firstName, surname };
   }
 }
