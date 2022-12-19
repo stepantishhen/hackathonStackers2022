@@ -50,7 +50,7 @@ export default function Header() {
 	const anchor = 'left';
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box sx={{ flexGrow: 1, display: 'flex', maxHeight: '150px', flexDirection: 'column' }}>
 			<AppBar position="static" color="secondary">
 				<Drawer anchor={anchor} open={isOpen} onClose={toggleMenu}>
 					<IconButton
@@ -65,32 +65,33 @@ export default function Header() {
 					<Typography variant="h6">Разделы</Typography>
 				</Drawer>
 
-				<Toolbar>
-					<IconButton
-						onClick={toggleMenu}
-						size="large"
-						edge="start"
-						color="inherit"
-						aria-label="menu"
-						sx={{ mr: 2 }}>
-						<MenuIcon />
-					</IconButton>
-					<Typography
-						variant="h6"
-						fontWeight={'xl'}
-						onClick={() => navigate('/')}
-						component="div"
-						sx={{ flexGrow: 1 }}>
-						Stackers <span className="underline underline-offset-4 text-blue-300 ">Events</span>
-					</Typography>
-					<Typography
-						variant="h6"
-						fontWeight={'xl'}
-						onClick={() => navigate('/scan')}
-						component="div"
-						sx={{ flexGrow: 1 }}>
-						Stackers <span className="underline underline-offset-4 text-blue-300 ">Events</span>
-					</Typography>
+				<Toolbar sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+					<Box sx={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+						<IconButton
+							onClick={toggleMenu}
+							size="large"
+							edge="start"
+							color="inherit"
+							aria-label="menu">
+							<MenuIcon />
+						</IconButton>
+						<Typography
+							variant="h6"
+							fontWeight={'xl'}
+							onClick={() => navigate('/')}
+							component="div"
+							sx={{ flexGrow: 1 }}>
+							Stackers <span className="underline underline-offset-4 text-blue-300 ">Events</span>
+						</Typography>
+						<Typography
+							variant="h6"
+							fontWeight={'xl'}
+							onClick={() => navigate('/scan')}
+							component="div"
+							sx={{ flexGrow: 1 }}>
+							<span className=" text-primary ">Сканировать QR-код</span>
+						</Typography>
+					</Box>
 
 					<Button onClick={() => navigate(user ? '/profile' : '/login')} color="inherit">
 						<span className="ml-2 font-bold font-montserrat">
