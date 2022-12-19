@@ -20,8 +20,8 @@ import jwtDecode from 'jwt-decode';
 import { setUser, UserState } from '../features/userSlice';
 
 export default function LoginForm() {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
@@ -39,12 +39,12 @@ export default function LoginForm() {
 		});
 		saveToken(response.data.data.accessToken);
 		const token = localStorage.getItem('accessToken');
+
 		if (token) {
 			const user: UserState = jwtDecode(token);
 			dispatch(setUser(user));
+			navigate('/');
 		}
-
-		navigate('/');
 	};
 
 	return (

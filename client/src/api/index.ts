@@ -11,8 +11,8 @@ export const saveToken = (token: string) => {
 	window.localStorage.setItem(accessTokenKey, token);
 	const user: UserState = jwtDecode(token);
 
-	const dispatch = useDispatch();
-	dispatch(setUser(user));
+	// const dispatch = useDispatch();
+	// dispatch(setUser(user));
 };
 
 export const getNewToken = async () => {

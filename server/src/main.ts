@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const grammyService = app.get(GrammyService);
-  run(grammyService);
+  // run(grammyService);
 
   app.enableCors({
     origin: ['http://localhost:5173'],

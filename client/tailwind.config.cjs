@@ -24,7 +24,7 @@ module.exports = {
 		},
 		gridTemplateColumns: {
 			profileLayout: '1fr 1fr 1fr',
-			eventLayout: 'auto auto ',
+			eventLayout: 'minmax(200px, 325px) auto ',
 		},
 	},
 	plugins: [require('@tailwindcss/line-clamp')],

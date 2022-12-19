@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { apiInstance } from '../api/api';
+import { setUser } from '../features/userSlice';
 import '../index.css';
 import Button from './Button';
 
-interface EventProps {
+export interface EventProps {
 	id: number;
 	name: string;
 	description: string;
@@ -13,11 +15,23 @@ interface EventProps {
 	updatedAt?: string;
 	tags?: string[];
 	visitors?: [];
+	withButton?: boolean;
+	attended?: boolean;
 }
 
-const Event = ({ id, name, description, place, date, visitors }: EventProps) => {
+const Event = ({
+	id,
+	name,
+	description,
+	place,
+	date,
+	visitors,
+	withButton,
+	attended,
+}: EventProps) => {
 	const tags = ['DevOps', 'WEB', 'Data-Science'];
 	const [isSubscribed, setIsSubscribed] = useState(!!visitors?.length);
+	const dispatch = useDispatch();
 
 	const handleSubscribe = async () => {
 		if (isSubscribed) {
@@ -67,12 +81,16 @@ const Event = ({ id, name, description, place, date, visitors }: EventProps) => 
 					<div>{dayjs(date).format('Начало DD.MM.YYYY в hh:mm')}</div>
 				</div>
 			</div>
-			<Button
-				className="uppercase font-montserrat font-black text-lg tracking-wide"
-				handleClick={handleSubscribe}
-				isActive={isSubscribed}
-				placeholder={isSubscribed ? 'Участвую' : 'Участвовать'}
-			/>
+			{withButton ? (
+				<Button
+					className="uppercase font-montserrat font-black text-lg tracking-wide"
+					handleClick={handleSubscribe}
+					isActive={isSubscribed}
+					placeholder={isSubscribed ? 'Участвую' : 'Участвовать'}
+				/>
+			) : (
+				<div className="text-white font-xl">{attended ? <span>Да</span> : <span>Нет</span>}</div>
+			)}
 		</div>
 	);
 };
