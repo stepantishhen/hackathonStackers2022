@@ -18,7 +18,7 @@ export const Scanner = (props) => {
 
 		<MainLayout>
 			<div className="py-4">
-				<div className="max-w-[500px] m-auto p-5 bg-black rounded-lg">
+				<div className=" max-w-[500px] m-auto p-5 bg-black rounded-lg">
 					<h2 className="text-white font-extrabold text-3xl text-center pb-4">
 						Наведитесь на QR-Код
 					</h2>

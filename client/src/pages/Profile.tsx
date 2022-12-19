@@ -64,12 +64,12 @@ const Profile = () => {
 	return (
 		<MainLayout>
 			<div className="mx-auto max-w-5xl py-6 w-full flex flex-col">
-				<div className="text-5xl font-extrabold mb-4">
+				<div className="text-5xl font-extrabold mb-4 text-center">
 					{firstName} {surname} {patronymic}
 				</div>
 				<div className="profileGridElement">{age}</div>
 				{type === 'admin' && <div className="profileGridElement">Создать мероприятие</div>}
-				<div className="flex flex-col gap-4">
+				<div className="flex flex-col gap-4 text-center">
 					<h2 className="text-4xl font-bold">Мои ивенты</h2>
 					<div className="flex flex-col gap-4">
 						{events.map((event) => (
