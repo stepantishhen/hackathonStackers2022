@@ -29,7 +29,10 @@
   }
 
   .profileGridElement {
-    @apply flex flex-col justify-center items-center;
+    @apply flex flex-col justify-center items-center ;
+  }
+  .btn--animation {
+    @apply animate-pulse;
   }
 }
 
@@ -37,6 +40,8 @@
   .event-mobile {
     @apply flex flex-col justify-center items-center;
   }
+  
+
 }
 
 
