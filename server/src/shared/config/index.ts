@@ -17,4 +17,6 @@ export default (): TConfig => ({
   TOKEN_REFRESH_KEY: getEnvVar('TOKEN_REFRESH_KEY'),
   cookieRefreshTokenKey: 'refreshToken',
   httpOnlyCookieAge: 30 * 24 * 60 * 60 * 1000,
+  BOT_TOKEN: getEnvVar('BOT_TOKEN'),
+  TG_USER_ID: getEnvVar('TG_USER_ID'),
 });

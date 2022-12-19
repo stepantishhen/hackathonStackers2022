@@ -5,10 +5,15 @@ import { AppModule } from './app.module';
 import { TConfig } from 'src/shared/types';
 import * as cookieParser from 'cookie-parser';
 import { TransformInterceptor } from './shared/lib';
-import * as cors from 'cors';
+import { GrammyService } from './grammy/grammy.service';
+import { run } from '@grammyjs/runner';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const grammyService = app.get(GrammyService);
+  run(grammyService);
+
   app.enableCors({
     origin: ['http://localhost:5173'],
     methods: 'GET,POST',

@@ -1,11 +1,18 @@
 import { ConflictException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { GrammyService } from 'src/grammy/grammy.service';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TConfig } from 'src/shared/types';
 import { CreateEventDTO } from './dto/create-event';
 import { UserEventDTO } from './dto/user-event';
 
 @Injectable()
 export class EventsService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    private prismaService: PrismaService,
+    private grammyService: GrammyService,
+    private configService: ConfigService<TConfig>,
+  ) {}
 
   async create(event: CreateEventDTO, userId: string) {
     await this.prismaService.event.create({
@@ -64,6 +71,11 @@ export class EventsService {
         attended: false,
       },
     });
+
+    await this.grammyService.api.sendMessage(
+      this.configService.getOrThrow('TG_USER_ID'),
+      'Вы успешно',
+    );
   }
 
   async unsubscribe({ eventId }: UserEventDTO, userId: string) {

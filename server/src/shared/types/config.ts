@@ -6,4 +6,6 @@ export type TConfig = {
   TOKEN_REFRESH_KEY: string;
   httpOnlyCookieAge: number;
   cookieRefreshTokenKey: 'refreshToken';
+  BOT_TOKEN: string;
+  TG_USER_ID: string;
 };
