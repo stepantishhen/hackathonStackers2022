@@ -28,6 +28,13 @@ export class EventsController {
     return this.eventService.create(event, req.userId);
   }
 
+  @Get('/user')
+  @UseFilters(AllExceptionsFilter)
+  @UseGuards(AuthGuard)
+  async userEvents(@Req() req: SRequest) {
+    return this.eventService.userEvents(req.userId);
+  }
+
   @Get('/')
   @UseFilters(AllExceptionsFilter)
   @UseGuards(AuthGuard)

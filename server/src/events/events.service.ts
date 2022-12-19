@@ -73,4 +73,12 @@ export class EventsService {
       },
     });
   }
+
+  async userEvents(userId: string) {
+    return this.prismaService.eventVisitor.findMany({
+      where: { userId },
+      take: 25,
+      include: { Event: true },
+    });
+  }
 }
