@@ -5,7 +5,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<div className=" max-w-[1920px] min-h-screen">
 			<Header />
-			{children}
+			<div className="px-2">{children}</div>
 		</div>
 	);
 };

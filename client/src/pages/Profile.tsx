@@ -64,7 +64,7 @@ const Profile = () => {
 	return (
 		<MainLayout>
 			<div className="mx-auto max-w-5xl py-6 w-full flex flex-col">
-				<div className="profileGridElement text-xl font-bold">
+				<div className="text-5xl font-extrabold mb-4">
 					{firstName} {surname} {patronymic}
 				</div>
 				<div className="profileGridElement">{age}</div>

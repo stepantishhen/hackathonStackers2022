@@ -6,11 +6,12 @@ module.exports = {
 			colors: {
 				primary: '#FFFFFF',
 				primaryContrast: '#000000',
-				secondary: '#14213d',
+				secondary: '#3b82f6',
 				secondaryContrast: '#FFFFFF',
 				danger: '#D80032',
 				dangerContrast: '#FFFFFF',
 				accent: '#fca311',
+
 				accentContrast: '#000000',
 			},
 		},
