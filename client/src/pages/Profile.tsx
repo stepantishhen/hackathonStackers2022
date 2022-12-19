@@ -9,6 +9,7 @@ const Profile = () => {
 	const user = useSelector((state: RootState) => state.user);
 	const dispatch = useDispatch();
 	const { age, id, firstName, surname, patronymic, type } = user;
+	const [events, setEvents] = useState([]);
 
 	const TYPES: any = {
 		visitor: 'Пользователь',
@@ -17,8 +18,9 @@ const Profile = () => {
 
 	useEffect(() => {
 		dispatch(getUser());
-		apiInstance.get(`/events/`, { params: { userId: id } }).then((res) => {
-			console.log(res.data.data);
+		// console.log(localStorage.getItem('accessToken'));
+		apiInstance.get(`/events?userId=${id}`).then((res) => {
+			setEvents(res.data.data);
 		});
 	}, []);
 
@@ -31,6 +33,11 @@ const Profile = () => {
 				<div className="profileGridElement">{age}</div>
 				<div className="profileGridElement">{TYPES[type]}</div>
 				{type === 'admin' && <div className="profileGridElement">Создать мероприятие</div>}
+				<div>
+					{events.map((event) => (
+						<div className="profileGridElement">{event.name}</div>
+					))}
+				</div>
 			</div>
 		</MainLayout>
 	);
