@@ -19,4 +19,5 @@ export default (): TConfig => ({
   httpOnlyCookieAge: 30 * 24 * 60 * 60 * 1000,
   BOT_TOKEN: getEnvVar('BOT_TOKEN'),
   TG_USER_ID: getEnvVar('TG_USER_ID'),
+  FRONTEND_URL: getEnvVar('FRONTEND_URL'),
 });

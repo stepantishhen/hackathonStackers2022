@@ -8,4 +8,5 @@ export type TConfig = {
   cookieRefreshTokenKey: 'refreshToken';
   BOT_TOKEN: string;
   TG_USER_ID: string;
+  FRONTEND_URL: string;
 };

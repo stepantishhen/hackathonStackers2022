@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { TConfig } from 'src/shared/types';
 import { CreateEventDTO } from './dto/create-event';
 import { UserEventDTO } from './dto/user-event';
+import { ScanDTO } from './dto/scan';
 
 @Injectable()
 export class EventsService {
@@ -72,9 +73,13 @@ export class EventsService {
       },
     });
 
-    await this.grammyService.api.sendMessage(
+    const qrApiUrl = new URL('https://api.qrserver.com/v1/create-qr-code');
+    qrApiUrl.searchParams.set('data', JSON.stringify({ eventId, userId }));
+    qrApiUrl.searchParams.set('size', '1024x1024');
+
+    await this.grammyService.api.sendPhoto(
       this.configService.getOrThrow('TG_USER_ID'),
-      'Вы успешно',
+      qrApiUrl.href,
     );
   }
 
@@ -91,6 +96,20 @@ export class EventsService {
       where: { userId },
       take: 25,
       include: { Event: true },
+    });
+  }
+
+  async scan({ eventId, userId }: ScanDTO) {
+    const eventVisitor =
+      await this.prismaService.eventVisitor.findUniqueOrThrow({
+        where: { userId_eventId: { userId, eventId } },
+      });
+
+    if (eventVisitor.attended) throw new ConflictException();
+
+    await this.prismaService.eventVisitor.update({
+      where: { id: eventVisitor.id },
+      data: { attended: true },
     });
   }
 }

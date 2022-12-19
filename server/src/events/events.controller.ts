@@ -12,6 +12,7 @@ import { AuthGuard } from 'src/auth/auth-guard';
 import { AllExceptionsFilter } from 'src/shared/lib';
 import { SRequest } from 'src/shared/types';
 import { CreateEventDTO } from './dto/create-event';
+import { ScanDTO } from './dto/scan';
 import { UserEventDTO } from './dto/user-event';
 import { EventsService } from './events.service';
 
@@ -54,5 +55,14 @@ export class EventsController {
   @UseGuards(AuthGuard)
   async unsubscribe(@Body() userEventDTO: UserEventDTO, @Req() req: SRequest) {
     return this.eventService.unsubscribe(userEventDTO, req.userId);
+  }
+
+  @Post('/scan')
+  @UseFilters(AllExceptionsFilter)
+  @UseGuards(AuthGuard)
+  async scan(@Body() scanDto: ScanDTO, @Req() req: SRequest) {
+    if (!req.isAdmin) throw new MethodNotAllowedException();
+
+    return this.eventService.scan(scanDto);
   }
 }
