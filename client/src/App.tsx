@@ -1,6 +1,4 @@
-import { ThemeProvider, useTheme } from '@emotion/react';
-import jwtDecode from 'jwt-decode';
-import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -12,12 +10,6 @@ import { Provider } from 'react-redux';
 import { Scanner } from './pages/Scanner';
 
 function App() {
-	const verifyUser = () => {
-		const token = localStorage.getItem('accessToken');
-		console.log(token);
-		return token ? true : false;
-	};
-
 	return (
 		<Provider store={store}>
 			<ThemeProvider theme={theme}>

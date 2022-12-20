@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { apiInstance } from '../api/api';
-import { setUser } from '../features/userSlice';
 import '../index.css';
 import Button from './Button';
 
@@ -89,7 +88,9 @@ const Event = ({
 					placeholder={isSubscribed ? 'Участвую' : 'Участвовать'}
 				/>
 			) : (
-				<div className="text-white font-xl">{attended ? <span>Да</span> : <span>Нет</span>}</div>
+				<div className="text-white font-xl">
+					Посетил(а):{attended ? <span>Да</span> : <span>Нет</span>}
+				</div>
 			)}
 		</div>
 	);
