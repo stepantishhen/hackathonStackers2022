@@ -7,9 +7,12 @@ const Home = () => {
 	const [events, setEvents] = useState([]);
 
 	useEffect(() => {
-		apiInstance.get('/events').then((res) => {
-			setEvents(res.data.data);
-		});
+		const fetchData = async () => {
+			apiInstance.get('/events').then((res) => {
+				setEvents(res.data.data);
+			});
+		};
+		fetchData().catch((err) => console.log(err));
 	}, []);
 
 	return (
